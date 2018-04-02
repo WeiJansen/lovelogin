@@ -49,10 +49,10 @@ $(function(){
 						<td><input type="text" name="searchName" value="${form.username }" /></td>
 						<td><label for="sex">性别</label></td>
 						<td><select name="sex" >
-						<c:if test="${form.sex} == null">
+						<c:if test="${empty form.sex}">
 							<option value="">请选择</option>
 						</c:if>
-						<c:if test="${form.sex } != null">
+						<c:if test="${!empty form.sex }">
 							<option value="${form.sex }">${form.sex }</option>
 						</c:if>
 								<option value="男">男</option>
