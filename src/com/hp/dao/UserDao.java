@@ -107,9 +107,8 @@ public class UserDao {
 			sql+= " and address like ? ";
 		}
 		if(date != null && date.length() > 0) {
-			params.add("%"+date+"%");
-			params.add("%"+date+"%");
-			sql+= " and date  >= CONVERT(datetime, ?)  and date < CONVERT(datetime, dateadd(day,1, ? )); ";
+			params.add(date);
+			sql+= " and date_format(date,'%Y-%m-%d') like date_format(?,'%Y-%m-%d') ";
 		}
 		
 			return  db.query(sql, params.toArray(), page);

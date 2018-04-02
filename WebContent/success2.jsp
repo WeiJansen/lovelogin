@@ -30,20 +30,7 @@ $(function(){
 	
 });
 
-function review(){
-	$.ajax({
-		url : "";
-		type : "POST";
-		data : {"action":""},
-		dataType : "JSON",
-		success : function(data){
-			$("input[name='searchName']").val();
-			$("select[name='sex']").val();
-			$("input[name='address']").val();
-			$("input[name='creatDate']").val();
-		}
-	});
-}
+
 
 </script>
 
@@ -59,10 +46,15 @@ function review(){
 				<table>
 					<tr>
 						<td><label for="searchName">用户名</label></td>
-						<td><input type="text" name="searchName" /></td>
+						<td><input type="text" name="searchName" value="${form.username }" /></td>
 						<td><label for="sex">性别</label></td>
-						<td><select name="sex">
-								<option value="">请选择</option>
+						<td><select name="sex" >
+						<c:if test="${form.sex} == null">
+							<option value="">请选择</option>
+						</c:if>
+						<c:if test="${form.sex } != null">
+							<option value="${form.sex }">${form.sex }</option>
+						</c:if>
 								<option value="男">男</option>
 								<option value="女">女</option>
 						</select></td>
@@ -72,9 +64,9 @@ function review(){
 						<td>
 						<label for="address">地址</label></td>
 						<td> <input type="text"
-							name="address"  /></td>
+							name="address" value="${form.address }" /></td>
 						<td><label for="time">创建时间</label></td>
-						<td><input type="text" name="createDate" id="createDate" readonly="readonly"/></td>
+						<td><input type="text" name="createDate" id="createDate" readonly="readonly" value="${form.date }" /></td>
 						<td><input type="submit" value="查询" /></td>
 					</tr>
 

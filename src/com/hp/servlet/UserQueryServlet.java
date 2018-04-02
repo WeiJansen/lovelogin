@@ -1,7 +1,6 @@
 package com.hp.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hp.po.User;
+import com.hp.po.FormBean;
 import com.hp.service.UserService;
 import com.hp.util.Page;
 
@@ -53,6 +52,11 @@ public class UserQueryServlet extends HttpServlet {
 		String sex = req.getParameter("sex");
 		String date = req.getParameter("createDate");
 		String pageNum = req.getParameter("pageNum");
+		FormBean form = new FormBean();
+		form.setUsername(name);
+		form.setAddress(address);
+		form.setSex(sex);
+		form.setDate(date);
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -70,10 +74,12 @@ public class UserQueryServlet extends HttpServlet {
 		}
 		
 		Page page = new Page();
-		page.setCount(5);
+		page.setCount(3);
 		page.setPageNum(Integer.parseInt(pageNum));
 		page = us.search(name,sex,address,date,page);
 		req.setAttribute("page", page);
+		req.setAttribute("form", form);
+		
 		req.getRequestDispatcher("success2.jsp").forward(req, resp);
 	}
 
